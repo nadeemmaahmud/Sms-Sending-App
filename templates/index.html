@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Send SMS{% endblock %}
+
+{% block content %}
+    <div class="container-index mt-5">
+        <h2 class="mb-0">Send a Sms</h2>
+        <hr/>
+        <br/>
+        <p>From : {{ my_number }}</p>
+        <form class="form-control" method="post" action="{% url 'index' %}">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary me-2">Send SMS</button>
+            <a href="{% url 'history' %}" class="text-decoration-none">See message history</a>
+        </form>
+    </div>
+{% endblock %}

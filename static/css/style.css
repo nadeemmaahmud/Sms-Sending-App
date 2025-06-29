@@ -15,9 +15,69 @@ body{
 }
 
 .container-index {
-    max-width: 500px;
+    max-width: 700px;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 16px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     padding: 2rem 2.5rem;
+}
+
+.text-body {
+    background-color: #1e1e1e;
+    color: white;
+    font-family: system-ui, sans-serif;
+}
+
+.sidebar {
+    height: 100vh;
+    background-color: #2d2d2d;
+    overflow-y: auto;
+}
+
+.sidebar .contact {
+    padding: 10px;
+    border-bottom: 1px solid #444;
+    cursor: pointer;
+}
+
+.sidebar .contact.active {
+    background-color: #3a3a3a;
+}
+
+.message-thread {
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    background-color: #1e1e1e;
+    padding-bottom: 80px;
+}
+
+.message {
+    background-color: #2d2d2d;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 10px;
+    max-width: 75%;
+}
+
+.timestamp {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-left: 15px;
+    margin-top: -10px;
+}
+
+.input-area {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 33.33%;
+    background-color: #2d2d2d;
+    padding: 10px;
+    border-top: 1px solid #444;
+}
+
+.input-area input {
+    background-color: #1e1e1e;
+    color: white;
+    border: 1px solid #555;
 }

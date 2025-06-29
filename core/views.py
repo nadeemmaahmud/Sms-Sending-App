@@ -1,35 +1,38 @@
 from django.shortcuts import render, redirect
-from .forms import SmsForm
 from django.contrib import messages
-from twilio.rest import Client
 from django.conf import settings
-from .models import Sms
+from .forms import SmsForm
+from twilio.rest import Client
 import os
 
-def index(request):
-    my_number = os.environ.get('sender_id')
+def send_sms(request):
     if request.method == 'POST':
         form = SmsForm(request.POST)
-    
         if form.is_valid():
-            sms = form.save(commit=False)
-            client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+            sms = form.save()
+
             try:
-                client.messages.create(
+                client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+                twilio_message = client.messages.create(
                     body=sms.message,
-                    from_="Nadim",
-                    to=sms.to_number
+                    from_=os.environ.get('sender_id'),
+                    to=sms.recipient.phone_number
                 )
-                messages.success(request, f"SMS sent successfully to {sms.to_number}!")
+
+                sms.status = 'sent'
                 sms.save()
-                return redirect('index')
+
+                messages.success(request, 'SMS sent successfully!')
             except Exception as e:
-                messages.error(request, f"Failed to send SMS: {str(e)}")
+                messages.error(request, f'Failed to send SMS: {e}')
+                print("Twilio error:", e)
+
+            return redirect('home')
+        else:
+            print("Form is invalid.")
+            print(form.errors)
     else:
         form = SmsForm()
 
-    return render(request, 'index.html', {'form': form, 'my_number': my_number})
+    return render(request, 'index.html', {'form': form})
 
-def history(request):
-    sms_history = Sms.objects.all().order_by('created_at').reverse()
-    return render(request, 'history.html', {'sms_history': sms_history})

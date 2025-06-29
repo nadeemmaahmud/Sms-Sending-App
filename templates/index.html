@@ -5,16 +5,71 @@
 {% block title %}Send SMS{% endblock %}
 
 {% block content %}
-    <div class="container-index mt-5">
-        <h2 class="mb-0">Send a Sms</h2>
-        <hr/>
-        <br/>
-        <p>From : {{ my_number }}</p>
-        <form class="form-control" method="post" action="{% url 'index' %}">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-primary me-2">Send SMS</button>
-            <a href="{% url 'history' %}" class="text-decoration-none">See message history</a>
-        </form>
+    <div class="container py-5" style="background-color: rgb(180, 129, 225);">
+      <div class="row justify-content-center">
+        <div class="col-md-4 d-flex align-items-center" style="min-height: 350px;">
+          <div class="w-100">
+            <div class="row align-items-center mb-3">
+              <div class="col-auto">
+                <a href="{% url 'home' %}" class="d-block text-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                    <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 2 7.5V14a1 1 0 0 0 1 1h3.5a.5.5 0 0 0 .5-.5V11h2v3.5a.5.5 0 0 0 .5.5H13a1 1 0 0 0 1-1V7.5a.5.5 0 0 0-.146-.354l-6-6zM13 14H9.5V11a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 0-.5.5v3H3V7.707l5-5 5 5V14z"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="col">
+                <h2 class="text-center mb-0">SMS Sending App</h2>
+              </div>
+            </div>
+            <form method="post" action="{% url 'home' %}">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <button type="submit" class="btn btn-primary w-100 mt-2 mb-3">Send SMS</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <h4 class="text-center mb-3">SMS Histories</h4>
+      <div class="form-control" style="background-color: rgb(132, 125, 125);">
+        <div class="row">
+          <div class="col-4">
+        <h3>Contacts</h3>
+        <ul class="list-group">
+          <li class="list-group-item">+880 17 0840 0862</li>
+        </ul>
+          </div>
+          <div class="col-1 d-flex justify-content-center align-items-stretch p-0">
+        <div style="width:2px; background-color:#e0e0e0; height:100%; margin:0 auto;"></div>
+          </div>
+          <div class="col-7 p-0">
+        <div class="p-3">
+          <div class="d-flex justify-content-end mb-2">
+            <div class="bg-primary text-white rounded px-3 py-2" style="max-width: 70%;">
+          Hi, this is a message I sent.
+          <div class="small text-end text-light">Thursday 6:15 PM</div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-start mb-2">
+            <div class="bg-light border rounded px-3 py-2" style="max-width: 70%;">
+          Hello! This is a reply I received.
+          <div class="small text-end text-muted">Thursday 6:16 PM</div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end mb-2">
+            <div class="bg-primary text-white rounded px-3 py-2" style="max-width: 70%;">
+          Another message I sent.
+          <div class="small text-end text-light">Thursday 6:17 PM</div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-start mb-2">
+            <div class="bg-light border rounded px-3 py-2" style="max-width: 70%;">
+          Got it, thanks!
+          <div class="small text-end text-muted">Thursday 6:18 PM</div>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
     </div>
 {% endblock %}

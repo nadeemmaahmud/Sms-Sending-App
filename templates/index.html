@@ -35,7 +35,9 @@
           <div class="col-4">
         <h3>Contacts</h3>
         <ul class="list-group">
-          <li class="list-group-item">+880 17 0840 0862</li>
+          {% for number in numbers %}
+            <li class="list-group-item">{{ number.phone_number }}</li>
+          {% endfor %}
         </ul>
           </div>
           <div class="col-1 d-flex justify-content-center align-items-stretch p-0">

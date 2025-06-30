@@ -3,11 +3,19 @@ from django import forms
 from .models import Sms, Contact
 
 class SmsForm(ModelForm):
-    recipient_phone = forms.CharField(label='Recipient Phone Number', max_length=20)
+    recipient_phone = forms.CharField(
+        label='Recipient Phone Number',
+        max_length=20,
+        widget=forms.TextInput(attrs={'placeholder': 'Eg. +8801234567890'}),
+    )
 
     class Meta:
         model = Sms
         fields = ['recipient_phone', 'message']
+        widgets = {
+            'message': Textarea(attrs={'placeholder': 'Enter your message', 'rows': 4}),
+        }
+        
 
     def save(self, commit=True):
         sms = super().save(commit=False)
@@ -20,3 +28,4 @@ class SmsForm(ModelForm):
         if commit:
             sms.save()
         return sms
+    

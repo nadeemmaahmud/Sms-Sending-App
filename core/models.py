@@ -16,7 +16,8 @@ class Sms(models.Model):
     status = models.CharField(max_length=20, choices=[
         ('pending', 'Pending'),
         ('sent', 'Sent'),
+        ('received', 'Received'),
     ], default='pending')
 
     def __str__(self):
-        return f"From: {os.environ.get('sender_id')} To: {self.recipient} | Status: {self.status}"
+        return f"From: {self.sender} To: {self.recipient.phone_number} - {self.status}"
